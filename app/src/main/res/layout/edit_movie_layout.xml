@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/editMovieString"
+                android:layout_marginTop="10dp"
+                android:layout_centerInParent="true"
+                android:textSize="25dp"/>
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/editTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginTop="20dp"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editYearText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date" />
+
+        <EditText
+            android:id="@+id/editDirectorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <Spinner
+            android:id="@+id/editGenreSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"/>
+
+        <RatingBar
+            android:id="@+id/editMovieRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Switch
+            android:id="@+id/editRecommendSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recommendString" />
+
+        <EditText
+            android:id="@+id/editCommentsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:layout_marginTop="20dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/updateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="79dp"
+                android:layout_marginLeft="79dp"
+                android:layout_marginTop="0dp"
+                android:text="@string/updateString" />
+
+            <Button
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="90dp"
+                android:layout_marginRight="90dp"
+                android:text="@string/deleteString" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

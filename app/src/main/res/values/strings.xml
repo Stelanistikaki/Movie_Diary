@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Movie Diary</string>
+    <string name="addMovieString">Add Movie</string>
+    <string name="editMovieString">Edit Movie</string>
+    <string name="viewAllMoviesString">View All Movies</string>
+    <string name="searchByString">Search by: </string>
+    <string name="searchMovieString">Search Movie</string>
+    <string name="titleString">Title</string>
+    <string name="yearString">Year</string>
+    <string name="directorString">Director</string>
+    <string name="commentsString">Any comments?</string>
+    <string name="recommendString">I would recommend it</string>
+    <string name="saveString">Save</string>
+    <string name="updateString">Update</string>
+    <string name="deleteString">Delete</string>
+</resources>
