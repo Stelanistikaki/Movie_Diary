@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "movie_db3";
+    public static final String DATABASE_NAME = "movie_db4";
     public static final String TABLE_NAME = "movie_table";
     public static final String IDCOL = "ID";
     public static final String TITLECOL = "TITLE";
@@ -84,7 +84,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor searchData(String value, String column){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + column + " = '" + value + "' ";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + column + " COLLATE NOCASE LIKE '%" + value + "%' "; //!!!!!
+        Log.d(TAG, "insertData: " + value);
         Cursor result = db.rawQuery(query, null);
         return result;
     }
