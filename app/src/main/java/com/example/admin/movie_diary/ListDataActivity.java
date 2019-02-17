@@ -73,6 +73,7 @@ public class ListDataActivity extends AppCompatActivity {
                     intent.putExtra("COMMENTS", comments);
 
                     startActivity(intent);
+                    finish();
                 }
                 else
                     toastMessage("No ID found with that movie");

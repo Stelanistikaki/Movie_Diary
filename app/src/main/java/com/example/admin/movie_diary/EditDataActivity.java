@@ -81,7 +81,6 @@ public class EditDataActivity extends AppCompatActivity {
 
         UpdateDataHelp();
         DeleteDataHelp();
-
     }
 
     private void UpdateDataHelp(){
@@ -101,8 +100,7 @@ public class EditDataActivity extends AppCompatActivity {
                 boolean updated = mDatabaseHelper.UpdateData(id, title, year, director, genre, rating, recommendString, comments);
                 if(updated) {
                     toastMessage("Movie updated!");
-                    Intent intent = new Intent(EditDataActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    finish();
                 }
                 else
                     toastMessage("Couldn't update this");
@@ -118,8 +116,7 @@ public class EditDataActivity extends AppCompatActivity {
                 int deleteRows = mDatabaseHelper.deleteData(id);
                 if(deleteRows > 0) {
                     toastMessage("Movie removed!");
-                    Intent intent = new Intent(EditDataActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    finish();
                 }
                 else
                     toastMessage("Something is wrong!");
@@ -127,6 +124,16 @@ public class EditDataActivity extends AppCompatActivity {
         });
 
     }
+
+    //this method is for when the back button is clicked without changes so it goes to ListDataActivity and not MainActivity
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(EditDataActivity.this, ListDataActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
+
 
     public void toastMessage(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

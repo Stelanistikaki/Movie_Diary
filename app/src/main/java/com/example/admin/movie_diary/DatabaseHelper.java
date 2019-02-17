@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "movie_db1";
+    public static final String DATABASE_NAME = "movie_db3";
     public static final String TABLE_NAME = "movie_table";
     public static final String IDCOL = "ID";
     public static final String TITLECOL = "TITLE";
@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,TITLE TEXT, YEAR TEXT, DIRECTOR TEXT, GENRE TEXT, RATING FLOAT, String BOOLEAN, COMMENTS TEXT) ";
+        String query = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,TITLE TEXT, YEAR TEXT, DIRECTOR TEXT, GENRE TEXT, RATING FLOAT, RECOMMEND TEXT, COMMENTS TEXT) ";
         db.execSQL(query);
 
     }
@@ -65,14 +65,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return(result != -1);
 
-    }
-
-    public Cursor getItemID(String name){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        String query = "SELECT " + IDCOL + " FROM " + TABLE_NAME + " WHERE " + TITLECOL + " = '" + name + "' ";
-        Cursor data = db.rawQuery(query, null);
-        return data;
     }
 
     public Cursor getItemData(String name){

@@ -61,8 +61,7 @@ public class AddDataActivity extends AppCompatActivity {
                 boolean isInserted = mDatabaseHelper.insertData(title, year, director, genre, ratingStarsNumber, recommend, comments);
                 if(isInserted) {
                     toastMessage("You watched another one? Cool!");
-                    Intent intent = new Intent(AddDataActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    finish();
                 }
                 else
                     toastMessage("I didn't quite catch that");

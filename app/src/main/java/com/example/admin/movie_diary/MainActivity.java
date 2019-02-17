@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         searchSpinner = findViewById(R.id.searchSpinner);
         mDatabaseHelper = new DatabaseHelper(this);
 
+        searchText.setFocusableInTouchMode(true);
+
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, searchValues); //selected item will look like a spinner set from XML
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout
