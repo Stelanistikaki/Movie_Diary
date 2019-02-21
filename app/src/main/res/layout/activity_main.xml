@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,44 +9,111 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
         android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/moviediary1"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="400dp">
 
+            <TextView
+                android:id="@+id/recentlyAdded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/quesha"
+                android:text="@string/recentlyAddedString"
+                android:textColor="@color/letterColor"
+                android:textSize="22dp"
+                android:layout_alignParentLeft="true" />
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPagerRecentlyAdded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_alignBottom="@id/indicator" />
+            <android.support.design.widget.TabLayout
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:tabBackground="@drawable/indicator_selector"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addMovieString"
+                android:textSize="17dp"
+                android:textColor="@color/letterColor"
+                android:fontFamily="@font/quesha"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="100dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginBottom="120dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/viewAllMoviesString"
+                android:textSize="17dp"
+                android:textColor="@color/letterColor"
+                android:fontFamily="@font/quesha"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="260dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginRight="100dp"/>
             <Button
                 android:id="@+id/addMovie"
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="90dp"
-                android:text="@string/addMovieString"
-                android:textSize="15dp" />
-
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="100dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginBottom="72dp"
+                android:background="@drawable/addimage" />
             <Button
                 android:id="@+id/viewAllMovies"
-                android:layout_width="200dp"
-                android:layout_height="60dp"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="190dp"
-                android:textSize="15dp"
-                android:text="@string/viewAllMoviesString" />
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="280dp"
+                android:layout_marginEnd="120dp"
+                android:layout_marginRight="121dp"
+                android:background="@drawable/showallimage" />
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
             android:orientation="horizontal"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="@string/searchByString"/>
+                android:textSize="17dp"
+                android:textColor="@color/letterColor"
+                android:text="@string/searchByString"
+                android:fontFamily="@font/quesha"/>
             <Spinner
                 android:id="@+id/searchSpinner"
                 android:layout_width="wrap_content"
@@ -62,11 +130,13 @@
                 android:id="@+id/searchButton"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:textSize="13dp"
+                android:textSize="18dp"
                 android:layout_centerInParent="true"
-                android:text="@string/searchMovieString"/>
+                android:text="@string/searchMovieString"
+                android:textColor="@color/letterColor"
+                android:textAllCaps="false"
+                android:fontFamily="@font/quesha"
+                android:background="@color/backgroundColor"/>
         </RelativeLayout>
-
-
     </LinearLayout>
 </ScrollView>

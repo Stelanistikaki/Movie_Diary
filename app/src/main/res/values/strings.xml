@@ -13,4 +13,5 @@
     <string name="saveString">Save</string>
     <string name="updateString">Update</string>
     <string name="deleteString">Delete</string>
+    <string name="recentlyAddedString">Recently Added: </string>
 </resources>

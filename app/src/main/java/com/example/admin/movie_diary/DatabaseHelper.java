@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "movie_db4";
+    public static final String DATABASE_NAME = "movie_db1";
     public static final String TABLE_NAME = "movie_table";
     public static final String IDCOL = "ID";
     public static final String TITLECOL = "TITLE";
@@ -77,14 +77,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY ID DESC ";
         Cursor result = db.rawQuery(query, null);
         return result;
     }
 
     public Cursor searchData(String value, String column){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + column + " COLLATE NOCASE LIKE '%" + value + "%' "; //!!!!!
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + column + " = '" + value + "' ";
         Log.d(TAG, "insertData: " + value);
         Cursor result = db.rawQuery(query, null);
         return result;
@@ -113,5 +113,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int deleteData (int id){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "id = ?", new String[]{String.valueOf(id)});
+    }
+
+    public Cursor getRecentData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery= "SELECT * FROM " + TABLE_NAME + " ORDER BY ID DESC LIMIT 4";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        return cursor;
     }
 }
