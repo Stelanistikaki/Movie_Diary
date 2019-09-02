@@ -20,14 +20,14 @@ public class AddDataActivity extends AppCompatActivity {
     private RatingBar ratingStars;
     private Button saveButton;
     private DatabaseHelper mDatabaseHelper;
-    private String[] movieGenres = {"Select a genre" , "Action", "Drama", "Comedy", "Thriller", "Horror", "Fantasy", "Sci-fi", "Anime"};
-    private static final String TAG = AddDataActivity.class.getName();
+    private String[] movieGenres = {"Select a genre" , "Action", "Crime", "Drama", "Comedy", "Mystery", "Romance", "Social", "Thriller", "Horror", "Historical", "Mindfuck", "True Story", "Biography", "Teen", "Musical", "Technology", "Fantasy", "Sci-fi", "Animation", "Anime"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_movie_activity);
+        getSupportActionBar().hide();
 
         mDatabaseHelper = new DatabaseHelper(this);
         titleText = findViewById(R.id.titleText);
@@ -45,7 +45,6 @@ public class AddDataActivity extends AppCompatActivity {
                 .simple_spinner_dropdown_item);
         genreSpinner.setAdapter(spinnerArrayAdapter);
 
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +60,8 @@ public class AddDataActivity extends AppCompatActivity {
                 boolean isInserted = mDatabaseHelper.insertData(title, year, director, genre, ratingStarsNumber, recommend, comments);
                 if(isInserted) {
                     toastMessage("You watched another one? Cool!");
+                    Intent intent  = new Intent(AddDataActivity.this, MainActivity.class);
+                    startActivity(intent);
                     finish();
                 }
                 else

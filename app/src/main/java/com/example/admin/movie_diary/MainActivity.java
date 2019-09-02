@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,19 +23,18 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button addMovieButton, viewAllButton, searchButton;
+    private Button addMovieButton, viewAllButton, searchButton, reloadButton;
     private Spinner searchSpinner;
     private EditText searchText;
-    //private ImageView logoImage;
+    private TextView recentlyAdded;
     private String[] searchValues = {"Title" , "Year", "Director", "Genre", "Rating", "Recommend"};
     DatabaseHelper mDatabaseHelper;
     String selectedCol, selectedText;
     boolean recommendSelected;
     ViewPager viewPager;
+    SwipeRefreshLayout swipeToRefresh;
     TabLayout indicator;
     ArrayList<String> recentMovies = new ArrayList<>();
-
-    private static final String TAG = MainActivity.class.getName();
 
 
     @Override
@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.searchButton);
         searchText = findViewById(R.id.searchText);
         searchSpinner = findViewById(R.id.searchSpinner);
-        //logoImage = findViewById(R.id.logoImage);
         mDatabaseHelper = new DatabaseHelper(this);
         viewPager= findViewById(R.id.viewPagerRecentlyAdded);
+        swipeToRefresh = findViewById(R.id.swiperefresh);
         indicator= findViewById(R.id.indicator);
+        recentlyAdded = findViewById(R.id.recentlyAdded);
 
-        //logoImage.setImageResource(R.drawable.moviediary1);
         searchText.setFocusableInTouchMode(true);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
@@ -63,9 +63,25 @@ public class MainActivity extends AppCompatActivity {
         searchSpinner.setAdapter(spinnerArrayAdapter);
 
         Cursor recent = mDatabaseHelper.getRecentData();
-        while(recent.moveToNext()){
-            recentMovies.add("'" + recent.getString(1) + "'");
+        if(recent.getCount() == 0){
+            recentlyAdded.setText("There are no recently added movies...Add some below!");
+            recentlyAdded.setTextSize(23);
         }
+        else{
+            while(recent.moveToNext()) {
+                recentMovies.add("'" + recent.getString(1) + "'");
+            }
+        }
+
+
+        swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
 
         viewPager.setAdapter(new ViewPagerAdapter(this, recentMovies));
         indicator.setupWithViewPager(viewPager, true);
@@ -100,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddDataActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -112,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     Intent intent  = new Intent(MainActivity.this, ListDataActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -132,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     private class SliderTimer extends TimerTask {

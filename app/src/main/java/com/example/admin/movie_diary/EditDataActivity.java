@@ -30,6 +30,7 @@ public class EditDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_movie_layout);
+        getSupportActionBar().hide();
 
         mDatabaseHelper = new DatabaseHelper(this);
         editTitleText = findViewById(R.id.editTitleText);
@@ -100,6 +101,8 @@ public class EditDataActivity extends AppCompatActivity {
                 boolean updated = mDatabaseHelper.UpdateData(id, title, year, director, genre, rating, recommendString, comments);
                 if(updated) {
                     toastMessage("Movie updated!");
+                    Intent intent  = new Intent(EditDataActivity.this, ListDataActivity.class);
+                    startActivity(intent);
                     finish();
                 }
                 else
@@ -116,6 +119,8 @@ public class EditDataActivity extends AppCompatActivity {
                 int deleteRows = mDatabaseHelper.deleteData(id);
                 if(deleteRows > 0) {
                     toastMessage("Movie removed!");
+                    Intent intent  = new Intent(EditDataActivity.this, ListDataActivity.class);
+                    startActivity(intent);
                     finish();
                 }
                 else

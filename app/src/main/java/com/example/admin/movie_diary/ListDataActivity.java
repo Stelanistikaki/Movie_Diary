@@ -7,13 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class ListDataActivity extends AppCompatActivity {
 
@@ -25,27 +22,41 @@ public class ListDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movie_list);
+        getSupportActionBar().hide();
 
         mListView = findViewById(R.id.listView);
         mDatabaseHelper = new DatabaseHelper(this);
 
         populateListView();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent  = new Intent(ListDataActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void populateListView(){
         Cursor data = mDatabaseHelper.getData();
-        ArrayList<String> listData = new ArrayList<>();
+        ArrayList<Movie> listData = new ArrayList<>();
         while(data.moveToNext()){
-            listData.add(data.getString(1));
+            String name = data.getString(1);
+            String genre = data.getString(4);
+            String rating = Float.toString(data.getFloat(5)) + "/5 ";
+            Movie aMovie = new Movie(name, genre, rating);
+            listData.add(aMovie);
         }
 
-        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
+        CustomListAdapter adapter = new CustomListAdapter(this, R.layout.adapter_list, listData);
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String name = parent.getItemAtPosition(position).toString();
+                Movie aMovie =(Movie) parent.getItemAtPosition(position);
+                String name = aMovie.getTitle();
                 Log.d(TAG, "onItemClick: You clicked on: " + name);
 
                 Cursor data = mDatabaseHelper.getItemData(name);

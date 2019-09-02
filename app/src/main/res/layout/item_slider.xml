@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:fontFamily="@font/xeroxserif_narrow"
+        android:textColor="@color/colorAccent"
         android:textSize="30dp" />
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -16,10 +17,13 @@ public class SearchDataActivity extends AppCompatActivity {
     DatabaseHelper mDatabaseHelper;
     ListView matchingListView;
 
+    private static final String TAG = SearchDataActivity.class.getName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_movie_list);
+        getSupportActionBar().hide();
 
         mDatabaseHelper = new DatabaseHelper(this);
         matchingListView = findViewById(R.id.resultListView);
@@ -29,17 +33,20 @@ public class SearchDataActivity extends AppCompatActivity {
         String value = receivedIntent.getStringExtra("value");
         String column = receivedIntent.getStringExtra("col");
 
+        Log.d(TAG, "updateData: " + value + " " + column);
         Cursor result = mDatabaseHelper.searchData(value, column);
         if(result.getCount() == 0){
             toastMessage("No movies found!");
             finish();
         }
-        ArrayList<String> resultListData = new ArrayList<>();
+        ArrayList<Movie> resultListData = new ArrayList<>();
         while(result.moveToNext()){
-            resultListData.add(result.getString(1));
+            String name = result.getString(1);
+            Movie aMovie = new Movie(name, null, null);
+            resultListData.add(aMovie);
         }
 
-        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, resultListData);
+        CustomListAdapter adapter = new CustomListAdapter(this, R.layout.adapter_list, resultListData);
         matchingListView.setAdapter(adapter);
     }
 

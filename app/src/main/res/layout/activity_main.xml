@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     android:fillViewport="true"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundColor"
+        android:layout_marginLeft="10dp"
         android:orientation="vertical">
 
         <ImageView
@@ -21,28 +22,34 @@
             android:layout_gravity="center"
             android:src="@drawable/moviediary1"/>
 
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp">
-
+            android:layout_height="300dp">
             <TextView
                 android:id="@+id/recentlyAdded"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/quesha"
                 android:text="@string/recentlyAddedString"
                 android:textColor="@color/letterColor"
-                android:textSize="22dp"
+                android:textSize="27dp"
                 android:layout_alignParentLeft="true" />
+            <android.support.v4.widget.SwipeRefreshLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/swiperefresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPagerRecentlyAdded"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="80dp"
                 android:layout_alignBottom="@id/indicator" />
+
             <android.support.design.widget.TabLayout
                 android:id="@+id/indicator"
                 android:layout_width="match_parent"
@@ -51,33 +58,7 @@
                 app:tabBackground="@drawable/indicator_selector"
                 app:tabGravity="center"
                 app:tabIndicatorHeight="0dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/addMovieString"
-                android:textSize="17dp"
-                android:textColor="@color/letterColor"
-                android:fontFamily="@font/quesha"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="100dp"
-                android:layout_marginLeft="100dp"
-                android:layout_marginBottom="120dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/viewAllMoviesString"
-                android:textSize="17dp"
-                android:textColor="@color/letterColor"
-                android:fontFamily="@font/quesha"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="260dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginRight="100dp"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
             <Button
                 android:id="@+id/addMovie"
                 android:layout_width="50dp"
@@ -87,7 +68,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="100dp"
                 android:layout_marginLeft="100dp"
-                android:layout_marginBottom="72dp"
+                android:layout_marginBottom="90dp"
                 android:background="@drawable/addimage" />
             <Button
                 android:id="@+id/viewAllMovies"
@@ -96,11 +77,12 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="280dp"
-                android:layout_marginEnd="120dp"
+                android:layout_marginTop="160dp"
+                android:layout_marginEnd="100dp"
                 android:layout_marginRight="121dp"
                 android:background="@drawable/showallimage" />
-        </RelativeLayout>
+            </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,7 +92,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="22dp"
                 android:textColor="@color/letterColor"
                 android:text="@string/searchByString"
                 android:fontFamily="@font/quesha"/>
@@ -128,15 +110,17 @@
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/searchButton"
-                android:layout_width="150dp"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:textSize="18dp"
+                android:textSize="22dp"
                 android:layout_centerInParent="true"
                 android:text="@string/searchMovieString"
                 android:textColor="@color/letterColor"
                 android:textAllCaps="false"
                 android:fontFamily="@font/quesha"
-                android:background="@color/backgroundColor"/>
+                android:background="@color/backgroundColor"
+                android:outlineSpotShadowColor="@color/backgroundColor"
+                android:outlineAmbientShadowColor="@color/backgroundColor"/>
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>
